@@ -2,7 +2,7 @@ FROM golang:latest AS builder
 # RUN mkdir /app
 ADD ./app/ /src/
 WORKDIR /src
-
+RUN go get github.com/julienschmidt/httprouter
 RUN CGO_ENABLED=0 go build -a -o /go/src/main .
 
 

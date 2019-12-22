@@ -3,5 +3,5 @@ services:
   app:
     image: goapp:latest
     build: .
-
-
+    ports:
+      - 30080:30080
