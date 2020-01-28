@@ -10,3 +10,8 @@ docker build -t goapp:latest . --rm
 ```shell
 docker system prune
 ```
+
+```sh
+docker-compose up --build
+```
+

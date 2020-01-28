@@ -1,45 +1,23 @@
 package main
 
+
 import (
   "fmt"
-  "log"
-  "net/rpc"
+  "github.com/shopspring/decimal"
 )
 
-type Item struct {
-  Title string
-  Body  string
-}
-
 func main() {
-  var reply Item
-  var db []Item
-
-  // log.Printf("Connection to server...")
-
-  client, err := rpc.DialHTTP("tcp", "srv:4040")
-
+  a, err := decimal.NewFromString("184467440073709551615")
   if err != nil {
-    log.Fatal("Connection error: ", err)
+    fmt.Println("Error %v", err)
+    return;
   }
+  b, _ := decimal.NewFromString("10")
+  fmt.Println("a. Number A is %v", a)
+  fmt.Println("b. Number B is %v", b)
 
-  a := Item{"First", "A first item"}
-  b := Item{"Second", "A second item"}
-  c := Item{"Third", "A third item"}
+  sum := decimal.Sum(a, b)
 
-  client.Call("API.AddItem", a, &reply)
-  client.Call("API.AddItem", b, &reply)
-  client.Call("API.AddItem", c, &reply)
-  client.Call("API.GetDB", "", &db)
+  fmt.Println("A + B is %v", sum)
 
-  fmt.Println("Database: ", db)
-
-  client.Call("API.EditItem", Item{"Second", "A new second item"}, &reply)
-
-  client.Call("API.DeleteItem", c, &reply)
-  client.Call("API.GetDB", "", &db)
-  fmt.Println("Database: ", db)
-
-  client.Call("API.GetByName", "First", &reply)
-  fmt.Println("first item: ", reply)
 }

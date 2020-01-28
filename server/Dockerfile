@@ -5,6 +5,7 @@ ADD . /src/
 WORKDIR /src
 
 RUN ls -lh
+RUN go version
 
 RUN CGO_ENABLED=0 go build -a -o /go/src/main .
 

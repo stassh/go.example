@@ -1,19 +1,19 @@
 version: '3'
 services:
-  # srv:
-  #   build: ./server
-  #   ports:
-  #     - 4040:4040
-  #   networks:
-  #     - go-rpc
+  srv:
+    build: ./server
+    ports:
+      - 4040:4040
+    networks:
+      - go-rpc
   clt:
     build: ./client
     # ports:
       # - 30081
     networks:
       - go-rpc
-    # depends_on:
-    #   - srv
+    depends_on:
+      - srv
 
 networks:
   go-rpc:
